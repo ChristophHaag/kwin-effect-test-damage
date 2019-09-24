@@ -3,6 +3,8 @@
 
 #include <kwineffects.h>
 
+#include <QElapsedTimer>
+
 class TestDamage : public KWin::Effect
 {
     Q_OBJECT
@@ -19,6 +21,7 @@ public:
 private:
     QString testWindowCaption;
     bool damageGotten = false;
+    QElapsedTimer timer;
 
 public Q_SLOTS:
     void slotWindowClosed(KWin::EffectWindow *w);

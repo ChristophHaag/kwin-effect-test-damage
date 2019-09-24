@@ -52,8 +52,10 @@ void TestDamage::drawWindow(KWin::EffectWindow *w,
     //qDebug() << "Draw Window" << w->caption();
 
     if (testWindowCaption == w->caption()) {
-        if (!damageGotten)
-            qDebug() << "DrawWindow for window" << w->caption() << "without previous damaged event!";
+        if (!damageGotten) {
+            qDebug() << "drawWindow(): Drawing window" << w->caption() << "without previous damaged event!";
+            qDebug() << "drawWindow():" << timer.nsecsElapsed() / (1000. * 1000.) << "ms since last damage";
+        }
 
         damageGotten = false;
     }
@@ -65,6 +67,8 @@ void TestDamage::damaged(KWin::EffectWindow *w)
 {
     if (testWindowCaption == w->caption()) {
         damageGotten = true;
+
+        timer.restart();
     }
 }
 
